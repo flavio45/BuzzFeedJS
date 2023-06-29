@@ -93,7 +93,7 @@ const populateQuestions = () => {
     question.answer.forEach((answer) => {
       const answerBlock = document.createElement("div");
       answerBlock.classList.add("answer-block");
-      answerBlock.addEventListener("click", handleClick);
+      answerBlock.addEventListener("click", () => handleClick);
 
       const answerImage = document.createElement("img");
       answerImage.setAttribute("src", answer.image);
@@ -101,8 +101,8 @@ const populateQuestions = () => {
 
       const answerTitle = document.createElement("h3");
       answerTitle.textContent = answer.text;
-
       answerBlock.append(answerImage, answerTitle);
+      answersBlock.append(answerBlock);
     });
 
     questionDisplay.append(answersBlock);
