@@ -99,6 +99,13 @@ const answers = [
     alt: "Parmesan",
   },
   {
+    combination: ["Nacho", "Van", "Football"],
+    text: "Feta",
+    image:
+      "https://cdn.pixabay.com/photo/2010/12/16/11/54/cabrales-3499_1280.jpg",
+    alt: "Feta Cheese",
+  },
+  {
     combination: ["Nacho", "Car", "Soccer"],
     text: "Cheddar",
     image:
