@@ -61,3 +61,8 @@ p {
 .answer-block img {
   width: 100%;
 }
+
+.result-block {
+  width: 600px;
+  border-radius: 5px;
+}

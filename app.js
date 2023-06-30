@@ -76,6 +76,40 @@ const questions = [
   },
 ];
 
+const answers = [
+  {
+    combination: ["Pizza", "Van", "Football"],
+    text: "Mozzarella",
+    image:
+      "https://cdn.pixabay.com/photo/2023/04/26/16/20/cheese-7952755_1280.jpg",
+    alt: "Mozzarella",
+  },
+  {
+    combination: ["Pizza", "Moped", "Golf"],
+    text: "Brie",
+    image:
+      "https://cdn.pixabay.com/photo/2010/12/16/11/53/brie-de-meux-3497_1280.jpg",
+    alt: "Brie",
+  },
+  {
+    combination: ["Pasta", "Moped", "Golf"],
+    text: "Parmesan",
+    image:
+      "https://cdn.pixabay.com/photo/2015/10/23/11/23/food-1002838_1280.jpg",
+    alt: "Parmesan",
+  },
+  {
+    combination: ["Nacho", "Car", "Soccer"],
+    text: "Cheddar",
+    image:
+      "https://cdn.pixabay.com/photo/2021/06/30/20/29/cheese-6377659_1280.jpg",
+    alt: "Cheddar",
+  },
+];
+
+const unansweredQuestions = [];
+const chosenAnswers = [];
+
 const populateQuestions = () => {
   questions.forEach((question) => {
     const titleBlock = document.createElement("div");
@@ -90,10 +124,14 @@ const populateQuestions = () => {
     answersBlock.id = question.id + "-answers";
     answersBlock.classList.add("answer-options");
 
+    unansweredQuestions.push(question.id);
+
     question.answer.forEach((answer) => {
       const answerBlock = document.createElement("div");
       answerBlock.classList.add("answer-block");
-      answerBlock.addEventListener("click", () => handleClick);
+      answerBlock.addEventListener("click", () =>
+        handleClick(question.id, answer.text)
+      );
 
       const answerImage = document.createElement("img");
       answerImage.setAttribute("src", answer.image);
@@ -111,6 +149,27 @@ const populateQuestions = () => {
 
 populateQuestions();
 
-const handleClick = () => {
-  console.log("clicked");
+const handleClick = (questionId, chosenAnswer) => {
+  if (unansweredQuestions.includes(questionId)) {
+    chosenAnswers.push(chosenAnswer);
+    const itemToRemove = unansweredQuestions.indexOf(questionId);
+
+    if (itemToRemove > -1) {
+      unansweredQuestions.splice(itemToRemove, 1);
+    }
+  }
+
+  const lowestQuestionId = Math.min(...unansweredQuestions);
+  location.href = "#" + lowestQuestionId;
+
+  if (!unansweredQuestions.length) {
+    showAnswer();
+  }
+};
+
+const showAnswer = () => {
+  const answerBlock = document.createElement("div");
+  answerBlock.classList.add("result-block");
+  const answerTitle = document.createElement("h3");
+  answerTitle.textContent = result.text;
 };
