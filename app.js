@@ -99,14 +99,14 @@ const answers = [
     alt: "Parmesan",
   },
   {
-    combination: ["Nacho", "Van", "Football"],
+    combination: ["Nachos", "Van", "Football"],
     text: "Feta",
     image:
       "https://cdn.pixabay.com/photo/2010/12/16/11/54/cabrales-3499_1280.jpg",
     alt: "Feta Cheese",
   },
   {
-    combination: ["Nacho", "Car", "Soccer"],
+    combination: ["Nachos", "Car", "Soccer"],
     text: "Cheddar",
     image:
       "https://cdn.pixabay.com/photo/2021/06/30/20/29/cheese-6377659_1280.jpg",
@@ -175,8 +175,26 @@ const handleClick = (questionId, chosenAnswer) => {
 };
 
 const showAnswer = () => {
+  let result;
+  answers.forEach((answer) => {
+    if (
+      chosenAnswers.includes(answer.combination[0]) &&
+      chosenAnswers.includes(answer.combination[1]) &&
+      chosenAnswers.includes(answer.combination[2])
+    ) {
+      result = answer;
+    } else {
+      result = answers[0];
+    }
+  });
+
   const answerBlock = document.createElement("div");
   answerBlock.classList.add("result-block");
   const answerTitle = document.createElement("h3");
   answerTitle.textContent = result.text;
+  const answerImage = document.createElement("img");
+  answerImage.setAttribute("src", result.image);
+
+  answerBlock.append(answerTitle, answerImage);
+  answerDisplay.append(answerBlock);
 };
